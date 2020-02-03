@@ -9,7 +9,7 @@ Generic all-purpose logger.
 ```go
 import (
   // ...
-  "gitlab.com/usvc/modules/go/logger"
+  "github.com/usvc/logger"
   // ...
 )
 ```

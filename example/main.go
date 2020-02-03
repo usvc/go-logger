@@ -3,7 +3,7 @@ package main
 import (
 	"path/filepath"
 
-	"gitlab.com/usvc/modules/go/logger"
+	"github.com/usvc/logger"
 )
 
 var file logger.Logger

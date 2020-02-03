@@ -1,4 +1,4 @@
-module gitlab.com/usvc/modules/go/logger
+module github.com/usvc/logger
 
 go 1.13
 
