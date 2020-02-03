@@ -1,6 +1,20 @@
 # Logger
 
-## `stdout` logger
+Generic all-purpose logger.
+
+## Usage
+
+### Import
+
+```go
+import (
+  // ...
+  "gitlab.com/usvc/modules/go/logger"
+  // ...
+)
+```
+
+### `stdout` logger
 
 ```go
 log := logger.New(logger.Config{
@@ -9,7 +23,7 @@ log := logger.New(logger.Config{
 ```
 
 
-## `stderr` logger
+### `stderr` logger
 
 ```go
 log := logger.New(logger.Config{
@@ -18,20 +32,43 @@ log := logger.New(logger.Config{
 })
 ```
 
-## Levelled logger (Text)
+### Levelled logger (Text)
 
 ```go
 log := logger.New(logger.Config{
   ReportCaller: true,
   Type:         logger.TypeLevelled,
 })
+
+// file based
+logPath, _ := filepath.Abs("./example/log.text")
+log := logger.New(logger.Config{
+  Output:         logger.OutputFileSystem,
+  OutputFilePath: logPath,
+  ReportCaller:   true,
+  Type:           logger.TypeLevelled,
+})
 ```
 
-## Levelled Logger (JSON)
+### Levelled Logger (JSON)
 
 ```go
 log := logger.New(logger.Config{
   Format: logger.FormatJSON,
   Type:   logger.TypeLevelled,
 })
+
+// file based
+logPath, _ := filepath.Abs("./example/log.json")
+log := logger.New(logger.Config{
+  Format:         logger.FormatJSON,
+  Output:         logger.OutputFileSystem,
+  OutputFilePath: logPath,
+  ReportCaller:   true,
+  Type:           logger.TypeLevelled,
+})
 ```
+
+## License
+
+Code here is licensed under the [MIT license](./LICENSE) by [@zephinzer](https://gitlab.com/zephinzer).
