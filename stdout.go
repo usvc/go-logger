@@ -7,11 +7,11 @@ var stdoutLogger = Stdout{}
 type Stdout struct{}
 
 func stdoutPrinter(args ...interface{}) {
-	fmt.Print(args...)
+	fmt.Println(args...)
 }
 
 func stdoutPrinterf(format string, args ...interface{}) {
-	fmt.Printf(format, args...)
+	fmt.Printf(fmt.Sprintf("%s\n", format), args...)
 }
 
 func (stdout Stdout) Trace(args ...interface{}) {

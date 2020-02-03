@@ -1,6 +1,9 @@
 package logger
 
 import (
+	"os"
+	"path/filepath"
+
 	"github.com/sirupsen/logrus"
 )
 
@@ -32,28 +35,38 @@ func New(config Config) Logger {
 		if len(config.Format) > 0 {
 			format = config.Format
 		}
+
+		output := OutputStdout
+		if len(config.Output) > 0 {
+			output = config.Output
+		}
+
 		log := logrus.New()
+
+		if output == OutputFileSystem {
+			outputFilePath, err := filepath.Abs(config.OutputFilePath)
+			if err != nil {
+				log.SetOutput(os.Stdout)
+			} else {
+				file, err := os.OpenFile(outputFilePath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, os.ModePerm)
+				if err != nil {
+					log.SetOutput(os.Stdout)
+				} else {
+					log.SetOutput(file)
+				}
+			}
+		} else if output == OutputStderr {
+			log.SetOutput(os.Stderr)
+		} else {
+			log.SetOutput(os.Stdout)
+		}
 		log.SetLevel(LogrusLevelMap[level])
 		log.SetReportCaller(config.ReportCaller)
+
 		if format == FormatJSON {
-			log.SetFormatter(&logrus.JSONFormatter{
-				CallerPrettyfier: LogrusCallerPrettyfier,
-				DataKey:          FieldData,
-				DisableTimestamp: false,
-				FieldMap:         LogrusFieldMap,
-				TimestampFormat:  TimestampFormat,
-			})
+			log.SetFormatter(FormatJSONPreset)
 		} else {
-			log.SetFormatter(&logrus.TextFormatter{
-				CallerPrettyfier:       LogrusCallerPrettyfier,
-				DisableLevelTruncation: true,
-				DisableSorting:         true,
-				DisableTimestamp:       true,
-				FieldMap:               LogrusFieldMap,
-				FullTimestamp:          true,
-				QuoteEmptyFields:       true,
-				TimestampFormat:        TimestampFormat,
-			})
+			log.SetFormatter(FormatTextPreset)
 		}
 		return log
 	}

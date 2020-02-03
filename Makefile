@@ -1,0 +1,2 @@
+eg:
+	go run ./example
