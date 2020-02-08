@@ -25,6 +25,7 @@ func New(config Config) Logger {
 	if len(config.Type) > 0 {
 		loggerType = config.Type
 	}
+
 	if loggerType == TypeLevelled {
 		level := LevelTrace
 		if len(config.Level) > 0 {
