@@ -1,5 +1,7 @@
 # Logger
 
+[![pipeline status](https://gitlab.com/usvc/modules/go/logger/badges/master/pipeline.svg)](https://gitlab.com/usvc/modules/go/logger/-/commits/master)
+
 Generic all-purpose logger.
 
 ## Usage
