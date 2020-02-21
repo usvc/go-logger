@@ -4,6 +4,18 @@
 
 Generic all-purpose logger.
 
+- [Logger](#logger)
+  - [Usage](#usage)
+    - [Import](#import)
+    - [`stdout` logger](#stdout-logger)
+    - [`stderr` logger](#stderr-logger)
+    - [Levelled logger (Text)](#levelled-logger-text)
+    - [Levelled Logger (JSON)](#levelled-logger-json)
+  - [Development Runbook](#development-runbook)
+    - [Getting Started](#getting-started)
+    - [Continuous Integration (CI) Pipeline](#continuous-integration-ci-pipeline)
+  - [License](#license)
+
 ## Usage
 
 ### Import
@@ -70,6 +82,26 @@ log := logger.New(logger.Config{
   Type:           logger.TypeLevelled,
 })
 ```
+
+## Development Runbook
+
+### Getting Started
+
+1. Clone this repository
+2. Run `make deps` to pull in external dependencies
+3. Write some awesome stuff
+4. Run `make test` to ensure unit tests are passing
+5. Push
+
+### Continuous Integration (CI) Pipeline
+
+To set up the CI pipeline in Gitlab:
+
+1. Run `make .ssh`
+2. Copy the contents of the file generated at `./.ssh/id_rsa.base64` into an environment variable named **`DEPLOY_KEY`** in **Settings > CI/CD > Variables**
+3. Navigate to the **Deploy Keys** section of the **Settings > Repository > Deploy Keys** and paste in the contents of the file generated at `./.ssh/id_rsa.pub` with the **Write access allowed** checkbox enabled
+
+- **`DEPLOY_KEY`**: generate this by running `make .ssh` and copying the contents of the file generated at `./.ssh/id_rsa.base64`
 
 ## License
 
