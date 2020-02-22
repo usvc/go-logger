@@ -2,13 +2,13 @@
 
 [![pipeline status](https://gitlab.com/usvc/modules/go/logger/badges/master/pipeline.svg)](https://gitlab.com/usvc/modules/go/logger/-/commits/master)
 
-Generic all-purpose logger.
+A Go package to handle logging for web services and CLI tools
 
 - [Logger](#logger)
   - [Usage](#usage)
     - [Import](#import)
-    - [`stdout` logger](#stdout-logger)
-    - [`stderr` logger](#stderr-logger)
+    - [stdout logger](#stdout-logger)
+    - [stderr logger](#stderr-logger)
     - [Levelled logger (Text)](#levelled-logger-text)
     - [Levelled Logger (JSON)](#levelled-logger-json)
   - [Development Runbook](#development-runbook)
