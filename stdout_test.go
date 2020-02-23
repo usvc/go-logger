@@ -1,6 +1,8 @@
 package logger
 
 import (
+	"bufio"
+	"bytes"
 	"testing"
 
 	"github.com/stretchr/testify/suite"
@@ -15,10 +17,14 @@ func TestStdout(t *testing.T) {
 }
 
 func (s *StdoutTests) Test_stdoutPrinter() {
-	stdout := captureStdoutFrom(func() {
-		stdoutPrinter("hello")
-	})
-	s.Equal("hello\n", stdout)
+	var output bytes.Buffer
+	originalOutputStream := outputStream
+	defer func() {
+		outputStream = originalOutputStream
+	}()
+	outputStream = bufio.NewWriter(&output)
+	stdoutPrinter("hello")
+	s.Equal("hello\n", output.String())
 }
 
 func (s *StdoutTests) Test_stdoutPrinterf() {

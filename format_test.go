@@ -37,6 +37,12 @@ func (s *FormatTests) SetupTest() {
 	}
 }
 
+func (s *FormatTests) TestFormatsIncludes() {
+	formats := Formats{FormatJSON}
+	s.True(formats.Includes(FormatJSON))
+	s.False(formats.Includes(FormatText))
+}
+
 func (s *FormatTests) TestLogrusCallerPrettyfier() {
 	frame := &runtime.Frame{
 		Function: "function",

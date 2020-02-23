@@ -24,9 +24,9 @@ type Logger interface {
 func New(opt ...Options) Logger {
 	options := Options{}
 	if len(opt) > 0 {
-		opt[0].AssignDefaults()
 		options = opt[0]
 	}
+	options.AssignDefaults()
 
 	level := options.Level
 	format := options.Format
