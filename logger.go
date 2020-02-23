@@ -35,7 +35,8 @@ func New(opt ...Options) Logger {
 	switch options.Type {
 	case TypeLevelled:
 		log := logrus.New()
-		if output == OutputFileSystem {
+		switch output {
+		case OutputFileSystem:
 			outputFilePath, err := filepath.Abs(options.OutputFilePath)
 			if err != nil {
 				log.SetOutput(os.Stdout)
@@ -48,9 +49,9 @@ func New(opt ...Options) Logger {
 			} else {
 				log.SetOutput(file)
 			}
-		} else if output == OutputStderr {
+		case OutputStderr:
 			log.SetOutput(os.Stderr)
-		} else {
+		default:
 			log.SetOutput(os.Stdout)
 		}
 		log.SetLevel(LogrusLevelMap[level])

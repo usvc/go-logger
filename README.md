@@ -6,11 +6,14 @@ A Go package to handle logging for web services and CLI tools
 
 - [Logger](#logger)
   - [Usage](#usage)
-    - [Import](#import)
-    - [stdout logger](#stdout-logger)
-    - [stderr logger](#stderr-logger)
-    - [Levelled logger (Text)](#levelled-logger-text)
-    - [Levelled Logger (JSON)](#levelled-logger-json)
+    - [Importing](#importing)
+    - [Logging to stdout](#logging-to-stdout)
+    - [Logging to stderr](#logging-to-stderr)
+    - [Logging to file system](#logging-to-file-system)
+    - [Logging in JSON](#logging-in-json)
+    - [Logging without levels](#logging-without-levels)
+    - [Logging without caller functions](#logging-without-caller-functions)
+  - [Example Application](#example-application)
   - [Development Runbook](#development-runbook)
     - [Getting Started](#getting-started)
     - [Continuous Integration (CI) Pipeline](#continuous-integration-ci-pipeline)
@@ -18,7 +21,7 @@ A Go package to handle logging for web services and CLI tools
 
 ## Usage
 
-### Import
+### Importing
 
 ```go
 import (
@@ -28,60 +31,66 @@ import (
 )
 ```
 
-### `stdout` logger
+### Logging to `stdout`
 
 ```go
-log := logger.New(logger.Config{
+log := logger.New(logger.Options{
   Type: logger.TypeStdout,
 })
 ```
 
 
-### `stderr` logger
+### Logging to `stderr`
 
 ```go
-log := logger.New(logger.Config{
+log := logger.New(logger.Options{
   Output: logger.OutputStderr,
-  Type:   logger.TypeStdout,
 })
 ```
 
-### Levelled logger (Text)
+
+### Logging to file system
 
 ```go
-log := logger.New(logger.Config{
-  ReportCaller: true,
-  Type:         logger.TypeLevelled,
-})
-
-// file based
-logPath, _ := filepath.Abs("./example/log.text")
-log := logger.New(logger.Config{
-  Output:         logger.OutputFileSystem,
-  OutputFilePath: logPath,
-  ReportCaller:   true,
-  Type:           logger.TypeLevelled,
+log := logger.New(logger.Options{
+  Output: logger.OutputStderr,
+  OutputFilePath: "./20200223.log",
 })
 ```
 
-### Levelled Logger (JSON)
+### Logging in JSON
 
 ```go
-log := logger.New(logger.Config{
+log := logger.New(logger.Options{
   Format: logger.FormatJSON,
-  Type:   logger.TypeLevelled,
-})
-
-// file based
-logPath, _ := filepath.Abs("./example/log.json")
-log := logger.New(logger.Config{
-  Format:         logger.FormatJSON,
-  Output:         logger.OutputFileSystem,
-  OutputFilePath: logPath,
-  ReportCaller:   true,
-  Type:           logger.TypeLevelled,
 })
 ```
+
+### Logging without levels
+
+```go
+log := logger.New(logger.Options{
+  Type: logger.TypeStdout,
+})
+```
+
+### Logging without caller functions
+
+```go
+log := logger.New(logger.Options{
+  ReportCaller: true,
+})
+```
+
+- - -
+
+## Example Application
+
+The example application can be found at [`./cmd/logger`](./cmd/logger). To try it out from this repository, run `make run`.
+
+To build it, run `make build_production`.
+
+- - -
 
 ## Development Runbook
 

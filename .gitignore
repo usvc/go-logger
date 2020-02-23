@@ -1,4 +1,5 @@
 *.log
 .ssh
+bin
 c.out
 vendor
