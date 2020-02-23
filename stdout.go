@@ -1,16 +1,22 @@
 package logger
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
 
 var stdoutLogger = Stdout{}
 
 type Stdout struct{}
 
+var outputStream = bufio.NewWriter(os.Stdout)
 var stdoutPrint = stdoutPrinter
 var stdoutPrintf = stdoutPrinterf
 
 func stdoutPrinter(args ...interface{}) {
-	fmt.Println(args...)
+	fmt.Fprintln(outputStream, args...)
+	outputStream.Flush()
 }
 
 func stdoutPrinterf(format string, args ...interface{}) {

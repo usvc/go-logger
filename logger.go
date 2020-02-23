@@ -1,6 +1,7 @@
 package logger
 
 import (
+	"bufio"
 	"os"
 	"path/filepath"
 
@@ -20,41 +21,32 @@ type Logger interface {
 	Errorf(string, ...interface{})
 }
 
-func New(config Config) Logger {
-	loggerType := TypeLevelled
-	if len(config.Type) > 0 {
-		loggerType = config.Type
+func New(opt ...Options) Logger {
+	options := Options{}
+	if len(opt) > 0 {
+		opt[0].AssignDefaults()
+		options = opt[0]
 	}
 
-	if loggerType == TypeLevelled {
-		level := LevelTrace
-		if len(config.Level) > 0 {
-			level = config.Level
-		}
+	level := options.Level
+	format := options.Format
+	output := options.Output
 
-		format := FormatText
-		if len(config.Format) > 0 {
-			format = config.Format
-		}
-
-		output := OutputStdout
-		if len(config.Output) > 0 {
-			output = config.Output
-		}
-
+	switch options.Type {
+	case TypeLevelled:
 		log := logrus.New()
-
 		if output == OutputFileSystem {
-			outputFilePath, err := filepath.Abs(config.OutputFilePath)
+			outputFilePath, err := filepath.Abs(options.OutputFilePath)
 			if err != nil {
 				log.SetOutput(os.Stdout)
+			} else if file, err := os.OpenFile(
+				outputFilePath,
+				OutputFileSystemFlags,
+				OutputFileSystemMode,
+			); err != nil {
+				log.SetOutput(os.Stdout)
 			} else {
-				file, err := os.OpenFile(outputFilePath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, os.ModePerm)
-				if err != nil {
-					log.SetOutput(os.Stdout)
-				} else {
-					log.SetOutput(file)
-				}
+				log.SetOutput(file)
 			}
 		} else if output == OutputStderr {
 			log.SetOutput(os.Stderr)
@@ -62,7 +54,7 @@ func New(config Config) Logger {
 			log.SetOutput(os.Stdout)
 		}
 		log.SetLevel(LogrusLevelMap[level])
-		log.SetReportCaller(config.ReportCaller)
+		log.SetReportCaller(options.ReportCaller)
 
 		if format == FormatJSON {
 			log.SetFormatter(FormatJSONPreset)
@@ -70,6 +62,21 @@ func New(config Config) Logger {
 			log.SetFormatter(FormatTextPreset)
 		}
 		return log
+	case TypeStdout:
+		fallthrough
+	default:
+		if output == OutputFileSystem {
+			outputFilePath, err := filepath.Abs(options.OutputFilePath)
+			if err == nil {
+				if file, err := os.OpenFile(
+					outputFilePath,
+					OutputFileSystemFlags,
+					OutputFileSystemMode,
+				); err == nil {
+					outputStream = bufio.NewWriter(file)
+				}
+			}
+		}
+		return stdoutLogger
 	}
-	return stdoutLogger
 }

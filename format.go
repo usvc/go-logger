@@ -7,12 +7,30 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+// Format defines a valid log format
 type Format string
 
+// Formats is a slice of Format
+type Formats []Format
+
+// Includes returns true if the provided :this is a proper log format
+func (formats Formats) Includes(this Format) bool {
+	for _, f := range formats {
+		if f == this {
+			return true
+		}
+	}
+	return false
+}
+
 const (
-	FormatText Format = "TEXT"
-	FormatJSON Format = "JSON"
+	FormatText Format = "text"
+	FormatJSON Format = "json"
+
+	DefaultFormat = FormatText
 )
+
+var ValidFormats Formats = Formats{FormatJSON, FormatText}
 
 var FormatJSONPreset = &logrus.JSONFormatter{
 	CallerPrettyfier: LogrusCallerPrettyfier,
