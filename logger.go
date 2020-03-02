@@ -62,7 +62,10 @@ func New(opt ...Options) Logger {
 		} else {
 			log.SetFormatter(FormatTextPreset)
 		}
-		return log
+		if options.Fields == nil {
+			return log
+		}
+		return log.WithFields(options.Fields)
 	case TypeStdout:
 		fallthrough
 	default:

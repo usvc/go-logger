@@ -2,6 +2,7 @@ package logger
 
 // Options holds configuration for a logger instance
 type Options struct {
+	Fields         map[string]interface{}
 	Format         Format
 	Level          Level
 	Output         Output
