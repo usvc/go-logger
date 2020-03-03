@@ -1,6 +1,6 @@
 # Logger
 
-[![release github](https://img.shields.io/github/v/release/usvc/logger?sort=semver)](https://github.com/usvc/logger)
+[![release github](https://img.shields.io/github/v/release/usvc/logger?sort=semver)](https://github.com/usvc/go-logger)
 
 [![pipeline status](https://gitlab.com/usvc/modules/go/logger/badges/master/pipeline.svg)](https://gitlab.com/usvc/modules/go/logger/-/commits/master)
 [![release status](https://travis-ci.org/usvc/logger.svg?branch=master)](https://travis-ci.org/usvc/logger)
@@ -29,7 +29,7 @@ A Go package to handle logging for web services and CLI tools
 ```go
 import (
   // ...
-  "github.com/usvc/logger"
+  "github.com/usvc/go-logger"
   // ...
 )
 ```

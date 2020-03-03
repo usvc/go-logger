@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
-	"github.com/usvc/logger"
+	"github.com/usvc/go-logger"
 )
 
 var (
@@ -20,7 +20,7 @@ var options = logger.Options{}
 var log logger.Logger
 var cmd = &cobra.Command{
 	Use:  "logger",
-	Long: "logger - sample application to demonstrate logging with github.com/usvc/logger",
+	Long: "logger - sample application to demonstrate logging with github.com/usvc/go-logger",
 	Example: strings.ReplaceAll(
 		strings.Trim(`
 			logger --format 'json'
