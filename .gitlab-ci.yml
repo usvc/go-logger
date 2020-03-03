@@ -28,21 +28,46 @@ unit test:
 
 .build:
   image: usvc/ci:go-build-production
+  stage: test & build
   dependencies: ["init"]
   artifacts:
     paths: ["./bin/*"]
-  script:
-    - git fetch
-    - CMD_ROOT=config GOOS=linux GOARCH=amd64 entrypoint
-    - CMD_ROOT=config GOOS=darwin GOARCH=amd64 entrypoint
-    - CMD_ROOT=config GOOS=windows GOARCH=386 BIN_EXT=.exe entrypoint
-test build:
+  variables:
+    BIN_NAME: logger
+  before_script: ["git fetch"]
+  script: ["entrypoint"]
+.build_linux:
   extends: .build
-  stage: test
+  variables:
+    GOOS: linux
+    GOARCH: amd64
+build linux (test):
+  extends: .build_linux
   only: ["master"]
-build:
+build linux:
+  extends: .build_linux
+  only: ["tags"]
+.build_macos:
   extends: .build
-  stage: build
+  variables:
+    GOOS: darwin
+    GOARCH: amd64
+build macos (test):
+  extends: .build_macos
+  only: ["master"]
+build macos:
+  extends: .build_macos
+  only: ["tags"]
+.build_windows:
+  extends: .build
+  variables:
+    GOOS: windows
+    GOARCH: "386"
+build windows (test):
+  extends: .build_windows
+  only: ["master"]
+build windows:
+  extends: .build_windows
   only: ["tags"]
 
 version bump:
