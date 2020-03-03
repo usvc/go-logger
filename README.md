@@ -1,5 +1,7 @@
 # Logger
 
+[![release github](https://img.shields.io/github/v/release/usvc/logger?sort=semver)](https://github.com/usvc/logger)
+
 [![pipeline status](https://gitlab.com/usvc/modules/go/logger/badges/master/pipeline.svg)](https://gitlab.com/usvc/modules/go/logger/-/commits/master)
 [![release status](https://travis-ci.org/usvc/logger.svg?branch=master)](https://travis-ci.org/usvc/logger)
 
@@ -8,8 +10,8 @@ A Go package to handle logging for web services and CLI tools
 - [Logger](#logger)
   - [Usage](#usage)
     - [Importing](#importing)
-    - [Logging to stdout](#logging-to-stdout)
-    - [Logging to stderr](#logging-to-stderr)
+    - [Logging to `stdout`](#logging-to-stdout)
+    - [Logging to `stderr`](#logging-to-stderr)
     - [Logging to file system](#logging-to-file-system)
     - [Logging in JSON](#logging-in-json)
     - [Logging without levels](#logging-without-levels)

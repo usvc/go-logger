@@ -1,42 +1,49 @@
-image: golang:1.13
+image: golang:1.14
 stages:
+  - init
   - test
   - build
   - release
   - package
   - publish
 
-test:
-  stage: test
+init:
+  stage: init
+  image: usvc/ci:go-dependencies
   cache:
     key: ${CI_PROJECT_REF}_${CI_COMMIT_REF_NAME}
-    paths:
-      - ./vendor
+    paths: ["./vendor"]
   artifacts:
-    expire_in: 1 day
-    paths:
-      - ./vendor
-      - ./c.out
-  before_script:
-    - apt-get update
-    - apt-get install -y make g++
-  script:
-    - make deps
-    - make test
+    paths: ["./vendor"]
+  script: ["entrypoint"]
 
-build:
-  stage: build
+unit test:
+  stage: test
+  image: usvc/ci:go-test
+  dependencies: ["init"]
   artifacts:
     expire_in: 1 day
-    paths:
-      - ./bin/*
-  before_script:
-    - apt-get update
-    - apt-get install -y make git g++ upx
+    paths: ["./c.out"]
+  script: ["entrypoint"]
+
+.build:
+  image: usvc/ci:go-build-production
+  dependencies: ["init"]
+  artifacts:
+    paths: ["./bin/*"]
   script:
-    - GOOS=linux GOARCH=amd64 make build_production
-    - GOOS=darwin GOARCH=amd64 make build_production
-    - GOOS=windows GOARCH=386 BIN_EXT=.exe make build_production
+    - git fetch
+    - CMD_ROOT=config GOOS=linux GOARCH=amd64 entrypoint
+    - CMD_ROOT=config GOOS=darwin GOARCH=amd64 entrypoint
+    - CMD_ROOT=config GOOS=windows GOARCH=386 BIN_EXT=.exe entrypoint
+test build:
+  extends: .build
+  stage: test
+  only: ["master"]
+build:
+  extends: .build
+  stage: build
+  only: ["tags"]
 
 version bump:
   stage: release
@@ -44,6 +51,7 @@ version bump:
     - master
   image: usvc/semver:gitlab-0.3.26
   before_script:
+    - apk update && apk upgrade
     - apk add openssh
     - mkdir -p ~/.ssh
     - 'printf -- "${DEPLOY_KEY}" | base64 -d > ~/.ssh/id_rsa'
