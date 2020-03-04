@@ -1,8 +1,7 @@
 image: golang:1.14
 stages:
   - init
-  - test
-  - build
+  - test & build
   - release
   - package
   - publish
@@ -18,7 +17,7 @@ init:
   script: ["entrypoint"]
 
 unit test:
-  stage: test
+  stage: test & build
   image: usvc/ci:go-test
   dependencies: ["init"]
   artifacts:
@@ -33,7 +32,7 @@ unit test:
   artifacts:
     paths: ["./bin/*"]
   variables:
-    BIN_NAME: logger
+    BIN_NAME: password
   before_script: ["git fetch"]
   script: ["entrypoint"]
 .build_linux:
