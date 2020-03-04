@@ -1,17 +1,16 @@
 # Logger
 
-[![release github](https://img.shields.io/github/v/release/usvc/go-logger?sort=semver)](https://github.com/usvc/go-logger)
-
+[![latest release](https://badge.fury.io/gh/usvc%2Fgo-logger.svg)](https://github.com/usvc/go-logger/releases)
 [![pipeline status](https://gitlab.com/usvc/modules/go/logger/badges/master/pipeline.svg)](https://gitlab.com/usvc/modules/go/logger/-/commits/master)
-[![release status](https://travis-ci.org/usvc/logger.svg?branch=master)](https://travis-ci.org/usvc/logger)
+[![release status](https://travis-ci.org/usvc/go-logger.svg?branch=master)](https://travis-ci.org/usvc/go-logger)
 
 A Go package to handle logging for web services and CLI tools
 
 - [Logger](#logger)
   - [Usage](#usage)
     - [Importing](#importing)
-    - [Logging to stdout](#logging-to-stdout)
-    - [Logging to stderr](#logging-to-stderr)
+    - [Logging to `stdout`](#logging-to-stdout)
+    - [Logging to `stderr`](#logging-to-stderr)
     - [Logging to file system](#logging-to-file-system)
     - [Logging in JSON](#logging-in-json)
     - [Logging without levels](#logging-without-levels)
