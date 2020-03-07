@@ -32,7 +32,7 @@ unit test:
   artifacts:
     paths: ["./bin/*"]
   variables:
-    BIN_NAME: password
+    BIN_NAME: logger
   before_script: ["git fetch"]
   script: ["entrypoint"]
 .build_linux:
