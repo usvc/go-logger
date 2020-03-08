@@ -2,7 +2,7 @@
 
 [![latest release](https://badge.fury.io/gh/usvc%2Fgo-logger.svg)](https://github.com/usvc/go-logger/releases)
 [![pipeline status](https://gitlab.com/usvc/modules/go/logger/badges/master/pipeline.svg)](https://gitlab.com/usvc/modules/go/logger/-/commits/master)
-[![release status](https://travis-ci.org/usvc/go-logger.svg?branch=master)](https://travis-ci.org/usvc/go-logger)
+[![build status](https://travis-ci.org/usvc/go-logger.svg?branch=master)](https://travis-ci.org/usvc/go-logger)
 
 A Go package to handle logging for web services and CLI tools.
 
