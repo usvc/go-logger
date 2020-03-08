@@ -6,6 +6,7 @@
 
 A Go package to handle logging for web services and CLI tools.
 
+| | |
 | --- | --- |
 | Github | [https://github.com/usvc/go-logger](https://github.com/usvc/go-logger) |
 | Gitlab | [https://gitlab.com/usvc/modules/go/logger](https://gitlab.com/usvc/modules/go/logger) |
