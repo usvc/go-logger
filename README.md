@@ -11,25 +11,26 @@ A Go package to handle logging for web services and CLI tools.
 | Github | [https://github.com/usvc/go-logger](https://github.com/usvc/go-logger) |
 | Gitlab | [https://gitlab.com/usvc/modules/go/logger](https://gitlab.com/usvc/modules/go/logger) |
 
+- - -
 
 - [Logger](#logger)
-  - [Usage](#usage)
-    - [Importing](#importing)
-    - [Logging to stdout](#logging-to-stdout)
-    - [Logging to stderr](#logging-to-stderr)
-    - [Logging to file system](#logging-to-file-system)
-    - [Logging in JSON](#logging-in-json)
-    - [Logging without levels](#logging-without-levels)
-    - [Logging without caller functions](#logging-without-caller-functions)
-  - [Example Application](#example-application)
-  - [Development Runbook](#development-runbook)
-    - [Getting Started](#getting-started)
-    - [Continuous Integration (CI) Pipeline](#continuous-integration-ci-pipeline)
-  - [License](#license)
+- [Usage](#usage)
+  - [Importing](#importing)
+  - [Logging to stdout](#logging-to-stdout)
+  - [Logging to stderr](#logging-to-stderr)
+  - [Logging to file system](#logging-to-file-system)
+  - [Logging in JSON](#logging-in-json)
+  - [Logging without levels](#logging-without-levels)
+  - [Logging without caller functions](#logging-without-caller-functions)
+- [Example Application](#example-application)
+- [Development Runbook](#development-runbook)
+  - [Getting Started](#getting-started)
+  - [Continuous Integration (CI) Pipeline](#continuous-integration-ci-pipeline)
+- [License](#license)
 
-## Usage
+# Usage
 
-### Importing
+## Importing
 
 ```go
 import (
@@ -39,7 +40,7 @@ import (
 )
 ```
 
-### Logging to `stdout`
+## Logging to `stdout`
 
 ```go
 log := logger.New(logger.Options{
@@ -48,7 +49,7 @@ log := logger.New(logger.Options{
 ```
 
 
-### Logging to `stderr`
+## Logging to `stderr`
 
 ```go
 log := logger.New(logger.Options{
@@ -57,7 +58,7 @@ log := logger.New(logger.Options{
 ```
 
 
-### Logging to file system
+## Logging to file system
 
 ```go
 log := logger.New(logger.Options{
@@ -66,7 +67,7 @@ log := logger.New(logger.Options{
 })
 ```
 
-### Logging in JSON
+## Logging in JSON
 
 ```go
 log := logger.New(logger.Options{
@@ -74,7 +75,7 @@ log := logger.New(logger.Options{
 })
 ```
 
-### Logging without levels
+## Logging without levels
 
 ```go
 log := logger.New(logger.Options{
@@ -82,7 +83,7 @@ log := logger.New(logger.Options{
 })
 ```
 
-### Logging without caller functions
+## Logging without caller functions
 
 ```go
 log := logger.New(logger.Options{
@@ -92,7 +93,7 @@ log := logger.New(logger.Options{
 
 - - -
 
-## Example Application
+# Example Application
 
 The example application can be found at [`./cmd/logger`](./cmd/logger). To try it out from this repository, run `make run`.
 
@@ -100,9 +101,9 @@ To build it, run `make build_production`.
 
 - - -
 
-## Development Runbook
+# Development Runbook
 
-### Getting Started
+## Getting Started
 
 1. Clone this repository
 2. Run `make deps` to pull in external dependencies
@@ -110,7 +111,7 @@ To build it, run `make build_production`.
 4. Run `make test` to ensure unit tests are passing
 5. Push
 
-### Continuous Integration (CI) Pipeline
+## Continuous Integration (CI) Pipeline
 
 To set up the CI pipeline in Gitlab:
 
@@ -120,6 +121,6 @@ To set up the CI pipeline in Gitlab:
 
 - **`DEPLOY_KEY`**: generate this by running `make .ssh` and copying the contents of the file generated at `./.ssh/id_rsa.base64`
 
-## License
+# License
 
 Code here is licensed under the [MIT license](./LICENSE) by [@zephinzer](https://gitlab.com/zephinzer).
