@@ -1,8 +1,10 @@
 # Logger
 
 [![latest release](https://badge.fury.io/gh/usvc%2Fgo-logger.svg)](https://github.com/usvc/go-logger/releases)
-[![pipeline status](https://gitlab.com/usvc/modules/go/logger/badges/master/pipeline.svg)](https://gitlab.com/usvc/modules/go/logger/-/commits/master)
 [![build status](https://travis-ci.org/usvc/go-logger.svg?branch=master)](https://travis-ci.org/usvc/go-logger)
+[![pipeline status](https://gitlab.com/usvc/modules/go/logger/badges/master/pipeline.svg)](https://gitlab.com/usvc/modules/go/logger/-/commits/master)
+[![maintainability](https://api.codeclimate.com/v1/badges/3f00918cb5b964476dd0/maintainability)](https://codeclimate.com/github/usvc/go-logger/maintainability)
+[![test coverage](https://api.codeclimate.com/v1/badges/3f00918cb5b964476dd0/test_coverage)](https://codeclimate.com/github/usvc/go-logger/test_coverage)
 
 A Go package to handle logging for web services and CLI tools.
 
@@ -16,8 +18,8 @@ A Go package to handle logging for web services and CLI tools.
 - [Logger](#logger)
 - [Usage](#usage)
   - [Importing](#importing)
-  - [Logging to stdout](#logging-to-stdout)
-  - [Logging to stderr](#logging-to-stderr)
+  - [Logging to `stdout`](#logging-to-stdout)
+  - [Logging to `stderr`](#logging-to-stderr)
   - [Logging to file system](#logging-to-file-system)
   - [Logging in JSON](#logging-in-json)
   - [Logging without levels](#logging-without-levels)
