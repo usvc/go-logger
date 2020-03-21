@@ -27,6 +27,8 @@ A Go package to handle logging for web services and CLI tools.
   - [Logging only Debug level and above](#logging-only-debug-level-and-above)
   - [Logging with a custom field](#logging-with-a-custom-field)
   - [Logging without levels](#logging-without-levels)
+- [Configuration](#configuration)
+  - [logger.Options](#loggeroptions)
 - [Example Application](#example-application)
 - [Development Runbook](#development-runbook)
   - [Getting Started](#getting-started)
@@ -107,6 +109,20 @@ log := logger.New(logger.Options{
   Type: logger.TypeStdout,
 })
 ```
+
+- - -
+
+# Configuration
+
+## `logger.Options`
+
+- **`Fields`** `map[string]interface{}`: Adds custom fields to the log entry.
+- **`Format`** `Format`: One of `FormatJSON` or `FormatText`. Defaults to `FormatText`.
+- **`Level`** `Level`: One of `LevelTrace`, `LevelDebug`, `LevelInfo`, `LevelWarn`, or `LevelError`. Defaults to `LevelTrace`.
+- **`Output`** `Output`: One of `OutputCustom`, `OutputFileSystem`, `OutputStderr`, or `OutputStdout`. Defaults to `OutputStdout`.
+- **`OutputFilePath`** `string`: Path to a log file, defaults to using `os.Stdout` if file cannot be created. Only applicable when `Output` is set to `OutputFileSystem`
+- **`OutputStream`** `io.Writer`: Only applicable when `Output` is set to `OutputCustom`
+- **`Type`** `Type`: One of `TypeLevelled` or `TypeStdout`. Defaults to `TypeLevelled`.
 
 - - -
 
