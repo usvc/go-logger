@@ -42,7 +42,6 @@ func preRun(command *cobra.Command, args []string) {
 	options.Level = logger.Level(level)
 	options.Output = logger.Output(output)
 	options.OutputFilePath = outputFilePath
-	options.ReportCaller = reportCaller
 	options.Type = logger.Type(logType)
 	options.AssignDefaults()
 	fmt.Println("{{field}}     : {{input}} > {{evaluated}}")
@@ -50,7 +49,6 @@ func preRun(command *cobra.Command, args []string) {
 	fmt.Printf("level         : %s > %s\n", level, options.Level)
 	fmt.Printf("output        : %s > %s\n", output, options.Output)
 	fmt.Printf("output-path   : %s > %s\n", outputFilePath, options.OutputFilePath)
-	fmt.Printf("report-caller : %v > %v\n", reportCaller, options.ReportCaller)
 	fmt.Printf("type          : %s > %s\n", logType, options.Type)
 	log = logger.New(options)
 }
@@ -72,7 +70,6 @@ func init() {
 	cmd.Flags().StringVarP(&output, "output", "o", string(logger.DefaultOutput), fmt.Sprintf("specifies the type of output {oneof:%v}", logger.ValidOutputs))
 	cmd.Flags().StringVarP(&logType, "type", "t", string(logger.DefaultType), fmt.Sprintf("specifies the type of logger {oneof:%v}", logger.ValidTypes))
 	cmd.Flags().StringVarP(&outputFilePath, "output-path", "O", logger.DefaultOutputFilePath, fmt.Sprintf("specifies the location of the output file path"))
-	cmd.Flags().BoolVarP(&reportCaller, "report-caller", "c", logger.DefaultReportCaller, fmt.Sprintf("if specified, outputs the caller in the logs"))
 }
 
 func main() {

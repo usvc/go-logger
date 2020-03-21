@@ -1,5 +1,7 @@
 package logger
 
+import "io"
+
 // Options holds configuration for a logger instance
 type Options struct {
 	Fields         map[string]interface{}
@@ -7,8 +9,9 @@ type Options struct {
 	Level          Level
 	Output         Output
 	OutputFilePath string
-	ReportCaller   bool
-	Type           Type
+	// OutputStream is used when Output is set to OutputCustom
+	OutputStream io.Writer
+	Type         Type
 }
 
 func (opt *Options) AssignDefaults() {

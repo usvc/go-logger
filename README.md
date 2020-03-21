@@ -8,6 +8,8 @@
 
 A Go package to handle logging for web services and CLI tools.
 
+> This package wraps `github.com/sirupsen/logrus` and adds sensible defaults so that logging is as easy as `logger.New()`
+
 | | |
 | --- | --- |
 | Github | [https://github.com/usvc/go-logger](https://github.com/usvc/go-logger) |
@@ -18,12 +20,13 @@ A Go package to handle logging for web services and CLI tools.
 - [Logger](#logger)
 - [Usage](#usage)
   - [Importing](#importing)
-  - [Logging to `stdout`](#logging-to-stdout)
-  - [Logging to `stderr`](#logging-to-stderr)
+  - [Logging to stderr](#logging-to-stderr)
   - [Logging to file system](#logging-to-file-system)
+  - [Logging to a buffer or custom io.Writer](#logging-to-a-buffer-or-custom-iowriter)
   - [Logging in JSON](#logging-in-json)
+  - [Logging only Debug level and above](#logging-only-debug-level-and-above)
+  - [Logging with a custom field](#logging-with-a-custom-field)
   - [Logging without levels](#logging-without-levels)
-  - [Logging without caller functions](#logging-without-caller-functions)
 - [Example Application](#example-application)
 - [Development Runbook](#development-runbook)
   - [Getting Started](#getting-started)
@@ -40,14 +43,6 @@ import (
   "github.com/usvc/go-logger"
   // ...
 )
-```
-
-## Logging to `stdout`
-
-```go
-log := logger.New(logger.Options{
-  Type: logger.TypeStdout,
-})
 ```
 
 
@@ -69,6 +64,16 @@ log := logger.New(logger.Options{
 })
 ```
 
+## Logging to a buffer or custom io.Writer
+
+```go
+var output bytes.Buffer
+log := logger.New(logger.Options{
+  Output: logger.OutputCustom,
+  OutputStream: &output,
+})
+```
+
 ## Logging in JSON
 
 ```go
@@ -77,19 +82,29 @@ log := logger.New(logger.Options{
 })
 ```
 
+## Logging only Debug level and above
+
+```go
+log := logger.New(logger.Options{
+  Level: logger.LevelDebug,
+})
+```
+
+## Logging with a custom field
+
+```go
+log := logger.New(logger.Options{
+  Fields: map[string]interface{}{
+    "module": "main",
+  },
+})
+```
+
 ## Logging without levels
 
 ```go
 log := logger.New(logger.Options{
   Type: logger.TypeStdout,
-})
-```
-
-## Logging without caller functions
-
-```go
-log := logger.New(logger.Options{
-  ReportCaller: true,
 })
 ```
 

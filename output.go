@@ -22,9 +22,10 @@ func (outputs Outputs) Includes(this Output) bool {
 }
 
 const (
+	OutputCustom     Output = "custom"
+	OutputFileSystem Output = "fs"
 	OutputStdout     Output = "stdout"
 	OutputStderr     Output = "stderr"
-	OutputFileSystem Output = "fs"
 
 	OutputFileSystemFlags = os.O_CREATE | os.O_WRONLY | os.O_APPEND
 	OutputFileSystemMode  = os.ModePerm
@@ -34,10 +35,12 @@ const (
 
 var (
 	DefaultOutputFilePath = fmt.Sprintf("./%s.log", RuntimeTimestamp)
+	DefaultOutputStream   = &os.Stdout
 )
 
 var ValidOutputs = Outputs{
+	OutputCustom,
+	OutputFileSystem,
 	OutputStdout,
 	OutputStderr,
-	OutputFileSystem,
 }

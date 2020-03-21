@@ -7,13 +7,12 @@ import (
 )
 
 const (
-	DefaultReportCaller = false
-
 	FieldData      = "@data"
 	FieldTimestamp = "@timestamp"
 	FieldLevel     = "@level"
 	FieldMessage   = "@message"
 	FieldFunc      = "@caller"
+	FieldFile      = "@file"
 
 	TimestampFormat = "20060102150405"
 )
@@ -27,4 +26,5 @@ var LogrusFieldMap = logrus.FieldMap{
 	logrus.FieldKeyLevel: FieldLevel,
 	logrus.FieldKeyMsg:   FieldMessage,
 	logrus.FieldKeyFunc:  FieldFunc,
+	logrus.FieldKeyFile:  FieldFile,
 }

@@ -16,7 +16,9 @@ run:
 test:
 	go test -v ./... -cover -coverprofile c.out
 build:
-	go build -o ./bin/$(CMD_ROOT) ./cmd/$(CMD_ROOT)_${GOOS}_${GOARCH}
+	go build \
+		-o ./bin/$(BIN_PATH) \
+		./cmd/$(CMD_ROOT)
 build_production:
 	CGO_ENABLED=0 \
 	go build -a -v \
