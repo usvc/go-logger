@@ -25,40 +25,17 @@ func New(opt ...Options) Logger {
 	}
 }
 
-func newStdout(options Options) Logger {
-	level := options.Level
-	output := options.Output
-
-	log := Stdout{Level: level}
-	switch output {
-	case OutputFileSystem:
-		outputFilePath, err := filepath.Abs(options.OutputFilePath)
-		if err == nil {
-			if file, err := os.OpenFile(
-				outputFilePath,
-				OutputFileSystemFlags,
-				OutputFileSystemMode,
-			); err == nil {
-				log.OutputStream = bufio.NewWriter(file)
-			}
-		}
-	case OutputCustom:
-		if options.OutputStream != nil {
-			log.OutputStream = bufio.NewWriter(options.OutputStream)
-		} else {
-			log.OutputStream = bufio.NewWriter(*DefaultOutputStream)
-		}
-	case OutputStderr:
-		log.OutputStream = bufio.NewWriter(os.Stderr)
-	case OutputStdout:
-		fallthrough
-	default:
-		log.OutputStream = bufio.NewWriter(*DefaultOutputStream)
+func NewLogrusEntry(opt ...Options) *logrus.Entry {
+	options := Options{}
+	if len(opt) > 0 {
+		options = opt[0]
 	}
-	return log
+	options.AssignDefaults()
+
+	return newLevelled(options)
 }
 
-func newLevelled(options Options) Logger {
+func newLevelled(options Options) *logrus.Entry {
 	level := options.Level
 	format := options.Format
 	output := options.Output
@@ -106,8 +83,38 @@ func newLevelled(options Options) Logger {
 		log.SetFormatter(FormatTextPreset)
 	}
 
-	if options.Fields == nil {
-		return log
-	}
 	return log.WithFields(options.Fields)
+}
+
+func newStdout(options Options) Logger {
+	level := options.Level
+	output := options.Output
+
+	log := Stdout{Level: level}
+	switch output {
+	case OutputFileSystem:
+		outputFilePath, err := filepath.Abs(options.OutputFilePath)
+		if err == nil {
+			if file, err := os.OpenFile(
+				outputFilePath,
+				OutputFileSystemFlags,
+				OutputFileSystemMode,
+			); err == nil {
+				log.OutputStream = bufio.NewWriter(file)
+			}
+		}
+	case OutputCustom:
+		if options.OutputStream != nil {
+			log.OutputStream = bufio.NewWriter(options.OutputStream)
+		} else {
+			log.OutputStream = bufio.NewWriter(*DefaultOutputStream)
+		}
+	case OutputStderr:
+		log.OutputStream = bufio.NewWriter(os.Stderr)
+	case OutputStdout:
+		fallthrough
+	default:
+		log.OutputStream = bufio.NewWriter(*DefaultOutputStream)
+	}
+	return log
 }

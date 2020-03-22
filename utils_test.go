@@ -17,6 +17,15 @@ func TestUtils(t *testing.T) {
 	suite.Run(t, &UtilsTests{})
 }
 
+func (s *UtilsTests) TestNewLogrusEntry_withDefaults() {
+	defer func() {
+		if r := recover(); r != nil {
+			s.True(false, r)
+		}
+	}()
+	var _ Logger = NewLogrusEntry()
+}
+
 func (s *UtilsTests) TestNew_withDefaults() {
 	defer func() {
 		if r := recover(); r != nil {
@@ -122,6 +131,20 @@ func (s *UtilsTests) TestNew_TypeLevelled_withStdout() {
 	s.Contains(output, "@level=trace")
 	s.Contains(output, "@timestamp=20")
 	s.Contains(output, "@message=\"hello world\"")
+}
+
+func (s *UtilsTests) TestNew_TypeLevelled_withJSONFormat() {
+	output := captureStdoutFrom(func() {
+		var log = New(Options{
+			Level:  LevelTrace,
+			Type:   TypeLevelled,
+			Format: FormatJSON,
+		})
+		log.Trace("hello world")
+	})
+	s.Contains(output, "\"@level\":\"trace\"")
+	s.Contains(output, "\"@timestamp\":\"20")
+	s.Contains(output, "\"@message\":\"hello world\"")
 }
 
 func (s *UtilsTests) TestNew_TypeStdout_withCustom() {
