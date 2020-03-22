@@ -117,12 +117,12 @@ log := logger.New(logger.Options{
 ## `logger.Options`
 
 - **`Fields`** `map[string]interface{}`: Adds custom fields to the log entry.
-- **`Format`** `Format`: One of `FormatJSON` or `FormatText`. Defaults to `FormatText`.
-- **`Level`** `Level`: One of `LevelTrace`, `LevelDebug`, `LevelInfo`, `LevelWarn`, or `LevelError`. Defaults to `LevelTrace`.
-- **`Output`** `Output`: One of `OutputCustom`, `OutputFileSystem`, `OutputStderr`, or `OutputStdout`. Defaults to `OutputStdout`.
+- **`Format`** `logger.Format`: One of `FormatJSON` or `FormatText`. Defaults to `FormatText`.
+- **`Level`** `logger.Level`: One of `LevelTrace`, `LevelDebug`, `LevelInfo`, `LevelWarn`, or `LevelError`. Defaults to `LevelTrace`.
+- **`Output`** `logger.Output`: One of `OutputCustom`, `OutputFileSystem`, `OutputStderr`, or `OutputStdout`. Defaults to `OutputStdout`.
 - **`OutputFilePath`** `string`: Path to a log file, defaults to using `os.Stdout` if file cannot be created. Only applicable when `Output` is set to `OutputFileSystem`
 - **`OutputStream`** `io.Writer`: Only applicable when `Output` is set to `OutputCustom`
-- **`Type`** `Type`: One of `TypeLevelled` or `TypeStdout`. Defaults to `TypeLevelled`.
+- **`Type`** `logger.Type`: One of `TypeLevelled` or `TypeStdout`. Defaults to `TypeLevelled`.
 
 - - -
 
