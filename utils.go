@@ -18,6 +18,8 @@ func New(opt ...Options) Logger {
 	switch options.Type {
 	case TypeLevelled:
 		return newLevelled(options)
+	case TypeNoOp:
+		return newNoOp(options)
 	case TypeStdout:
 		fallthrough
 	default:
@@ -84,6 +86,11 @@ func newLevelled(options Options) *logrus.Entry {
 	}
 
 	return log.WithFields(options.Fields)
+}
+
+func newNoOp(options Options) Logger {
+	log := NoOp{}
+	return log
 }
 
 func newStdout(options Options) Logger {

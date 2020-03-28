@@ -5,8 +5,6 @@ import (
 	"fmt"
 )
 
-var stdoutLogger = Stdout{}
-
 type Stdout struct {
 	Level        Level
 	OutputStream *bufio.Writer

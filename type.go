@@ -17,10 +17,11 @@ func (types Types) Includes(this Type) bool {
 }
 
 const (
-	TypeStdout   Type = "stdout"
 	TypeLevelled Type = "levelled"
+	TypeNoOp     Type = "noop"
+	TypeStdout   Type = "stdout"
 
 	DefaultType = TypeLevelled
 )
 
-var ValidTypes = Types{TypeStdout, TypeLevelled}
+var ValidTypes = Types{TypeLevelled, TypeNoOp, TypeStdout}

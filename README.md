@@ -8,7 +8,7 @@
 
 A Go package to handle logging for web services and CLI tools.
 
-> This package wraps `github.com/sirupsen/logrus` and adds sensible defaults so that logging is as easy as `logger.New()`
+> This package wraps `github.com/sirupsen/logrus` and adds defaults so that creating a sensible logger is as easy as `logger.New()`
 
 | | |
 | --- | --- |
@@ -21,6 +21,7 @@ A Go package to handle logging for web services and CLI tools.
 - [Usage](#usage)
   - [Importing](#importing)
   - [Instantiating a basic logger](#instantiating-a-basic-logger)
+  - [Instantiating a logger without output](#instantiating-a-logger-without-output)
   - [Instantiating a basic logger instance](#instantiating-a-basic-logger-instance)
   - [Logging to stderr](#logging-to-stderr)
   - [Logging to file system](#logging-to-file-system)
@@ -59,6 +60,15 @@ import (
 
 ```go
 log := logger.New()
+```
+
+
+## Instantiating a logger without output
+
+```go
+log := logger.New(logger.Options{
+  Type: logger.TypeNoOp,
+})
 ```
 
 

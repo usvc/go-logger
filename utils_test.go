@@ -147,6 +147,11 @@ func (s *UtilsTests) TestNew_TypeLevelled_withJSONFormat() {
 	s.Contains(output, "\"@message\":\"hello world\"")
 }
 
+func (s *UtilsTests) TestNew_TypeNoOp() {
+	var log Logger = New(Options{Type: TypeNoOp})
+	s.NotNil(log)
+}
+
 func (s *UtilsTests) TestNew_TypeStdout_withCustom() {
 	var output bytes.Buffer
 	var log = New(Options{
