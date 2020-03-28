@@ -190,6 +190,7 @@ Output defines where the logs should be streamed to.
 Type defines the type of logger desired.
 
 - **`TypeLevelled`**: defines a levelled logger
+- **`TypeNoOp`**: defines a silent logger
 - **`TypeStdout`**: defines a plaintext logger
 
 - - -
