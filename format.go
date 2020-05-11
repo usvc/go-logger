@@ -42,7 +42,7 @@ var FormatJSONPreset = &logrus.JSONFormatter{
 
 var FormatTextPreset = &logrus.TextFormatter{
 	CallerPrettyfier:       LogrusCallerPrettyfier,
-	DisableLevelTruncation: true,
+	DisableLevelTruncation: false,
 	DisableSorting:         true,
 	DisableTimestamp:       false,
 	FieldMap:               LogrusFieldMap,
@@ -52,5 +52,5 @@ var FormatTextPreset = &logrus.TextFormatter{
 }
 
 func LogrusCallerPrettyfier(frame *runtime.Frame) (function string, file string) {
-	return frame.Function, filepath.Base(frame.File)
+	return filepath.Base(frame.Function), filepath.Base(frame.File)
 }

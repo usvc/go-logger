@@ -53,6 +53,16 @@ func (s *FormatTests) TestLogrusCallerPrettyfier() {
 	s.Equal("file", file)
 }
 
+func (s *FormatTests) TestLogrusCallerPrettyfier_withFunctionPath() {
+	frame := &runtime.Frame{
+		Function: "path/to/function",
+		File:     "/path/to/some/file",
+	}
+	function, file := LogrusCallerPrettyfier(frame)
+	s.Equal("function", function)
+	s.Equal("file", file)
+}
+
 func (s *FormatTests) TestFormatJSONPreset() {
 	var formatter logrus.Formatter = FormatJSONPreset
 	formattedText, err := formatter.Format(s.testLogrusEntry)
